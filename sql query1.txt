@@ -1,0 +1,134 @@
+create database scarLife
+use scarLife
+
+------tblInsured---
+create table tblInsured(InsuredID int primary key,Name varchar(50) not null,
+Gender varchar(7) not null, DOB datetime not null, FEnterDate datetime,
+FExitDate datetime, Industry varchar(50) not null,Occupation varchar(50) not null,
+Block varchar(50) not null, Village varchar(50) not null, District varchar(50) not null,
+State varchar(50) not null,pin varchar(7) not null,
+Nomineename varchar(50) not null,NomineRelation varchar(50) not null,
+NomineeAge numeric(3) )
+
+
+--------------tblMedicalHistory----------------
+create table tblMedicalHistory(SNo int primary key,InsuredID int,
+DDate datetime not null,Disease varchar(100) not null)
+
+
+---------tblPolicyDetails-------
+create table tblPolicyDetails(PolicyNumber varchar(20) primary key,
+InsuredID int not null,Insurer varchar(50) not null,
+TPA varchar(50) not null,TypeOfCover varchar(30) not null,
+EffectiveDate datetime not null,ExpiryDate datetime not null,
+PremiumRate numeric(10,2),PremiumMode varchar(30),
+Maternity varchar(1),BabyCover varchar(1),
+BabyCoverDaysStart numeric(30),PreHospiDays numeric(1) not null,
+PostHospidays numeric(1) not null,PolicyMax numeric(10,2) not null,
+PolicyDeductible numeric(10,2) not null)
+
+
+
+-------tblPolicymaximums-----
+
+create table tblPolicyMaximums(PolicyNumber varchar(20) not null,OPMax numeric(10,2),
+AmbulanceMax numeric(10,2),CheckUpMax numeric(10,2),RoomMax numeric(10,2),
+Nursing numeric(10,2),IcuMax numeric(10,2),OperatingRoomMax numeric(10,2),
+DoctorChargesMax numeric(10,2),DrugsMax numeric(10,2),InvestigationMax numeric(10,2),
+DiagMax numeric(10,2),ConsumablesMax numeric(10,2),
+OthersMax numeric(10,2))
+
+
+-------MasterIndustries----
+
+create table MasterIndustries(Industry varchar(50) primary key)
+
+
+-----------------MasterInsurers------------------
+
+create table MasterInurers(Insurer varchar(50) primary key)
+
+
+-------MasterOccupations
+
+create table MasterOccupations(occupation varchar(50) primary key)
+
+------MasterRelations
+
+create table MasterRelations(Relation varchar(50) primary key)
+
+
+-------MasterStates
+
+create table MasterStates(state varchar(50) primary key)
+
+-------MasterTPA
+
+create table MasterTPA(TPA varchar(50) primary key)
+
+-----Articles
+
+create table Articles(sno int primary key,title varchar(50) not null,fname varchar(255) not null)
+
+------tblSuperAdmin
+
+create table tblSuperAdmin(UserID varchar(20) primary key,Pssword varchar(20) not null)
+
+select*from sys.tables
+
+--------RegistrationForm
+drop table RegistrationForm
+create table RegistrationForm(FirstName varchar(20) not null,
+LastName varchar(20) not null,
+DateofBirth datetime not null,
+Emailaddress varchar(30) not null,
+gender varchar(10) not null,
+MaritalStatus varchar(10) not null,
+
+Address varchar(50) not null, city varchar(30) not null,
+Pincode bigint ,country varchar(30) not null,
+state varchar(40) not null,mobileNumber bigint,
+landlineNumber bigint,
+UserID varchar(50) primary key,
+password varchar(20) not null,confirmPassword varchar(20) not null)
+
+select*from RegistrationForm
+
+create table SubCategory(
+InsuranceCategory varchar(20),
+SubProductType varchar(30),
+SubProductDescription varchar(500),
+SubProductimage image)
+select * from SubCategory
+
+create procedure sp_subcategory(@InsuranceCategory varchar(20), @SubProductType varchar(30), @SubProductDescription varchar(500),@SubProductimage image)
+as 
+INSERT INTO sp_subcategory VALUES (@InsuranceCategory , @SubProductType, @SubProductDescription,@SubProductimage )
+
+ 
+
+create procedure sp_insert(@Producttitle varchar(20), @Productdescription varchar(500), @Productimage image)
+as 
+INSERT INTO sp_subcategory VALUES (@Producttitle,@Productdescription,@Productimage)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
